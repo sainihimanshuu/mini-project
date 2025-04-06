@@ -10,7 +10,7 @@ from tensorflow.image import resize
 
 @st.cache_resource()
 def load_model():
-  model = tf.keras.models.load_model("Trained_model.keras")
+  model = tf.keras.models.load_model("Trained_model.h5")
   return model
 
 def load_and_preprocess_data(file_path, target_shape=(150, 150)):
