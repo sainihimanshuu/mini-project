@@ -66,26 +66,26 @@ if(app_mode=="Home"):
 **Our mission is to streamline the process of identifying music genres from audio tracks. Simply upload an audio file, and our advanced system will analyze it to determine its genre. Experience the innovative power of AI in music analysis!**
 
 ### How It Works
-1. **Upload Audio:** Visit the **Genre Classification** page and upload your audio file.    
+1. **Upload Audio:** Visit the **Prediction** page and upload your audio file.    
 2. **Analysis:** Our system uses cutting-edge algorithms to categorize the audio into one of the predefined genres.
 3. **Results:** See the predicted genre along with additional relevant details.
 
 ### Why Choose Our Service?
-- **High Accuracy:** e utilize the latest deep learning models to ensure precise genre predictions.
+- **High Accuracy:** We utilize the latest deep learning models to ensure precise genre predictions.
 - **Easy to Use:** Our interface is designed to be simple and intuitive, providing a seamless user experience.
 - **Quick Results:** Receive your results swiftly, allowing for faster music organization and discovery.
                 
 ### Get Started Now
-Navigate to the **Genre Classification** page in the sidebar, upload your audio file, and discover the capabilities of our Music Genre Classification System.
+Navigate to the **Prediction** page in the sidebar, upload your audio file, and discover the capabilities of our Music Genre Classification System.
 
 ### About Us
-Learn more about the project and our team on the **About** page.
+Learn more about the project and our team on the **About Project** page.
 """)
 
 elif(app_mode=="About Project"):
     st.markdown("""
                 ### About Project
-                Music. Experts have been trying for a long time to understand sound and what differenciates one song from another. How to visualize sound. What makes a tone different from another.
+                Music experts have been trying for a long time to understand sound and what differenciates one song from another. How to visualize sound. What makes a tone different from another.
 
                 This data hopefully can give the opportunity to do just that.
 
