@@ -5,6 +5,7 @@ import librosa
 from matplotlib import pyplot
 import numpy as np
 from tensorflow.image import resize
+import os
 
 # do something about the file path of audio file
 
@@ -113,24 +114,43 @@ elif(app_mode=="About Project"):
                 """)
 
 elif(app_mode=="Prediction"):
+    filepath=[] 
     st.header("Model Prediction")
-    test_mp3 = st.file_uploader("Upload an audio file", type=["mp3"])
-    if test_mp3 is not None:
-            filepath = 'Test/'+test_mp3.name
-            
+    file_mode = st.selectbox("Select Type",["file", "folder"])
+
+    if(file_mode=="file"):
+        test_mp3_files = st.file_uploader("Upload an audio file", accept_multiple_files=True)
+        if test_mp3_files is not None:
+            for mp3_file in test_mp3_files: 
+                temp_path = os.path.join("Test", mp3_file.name)
+                os.makedirs("Test", exist_ok=True)
+                
+                with open(temp_path, "wb") as f:
+                    f.write(mp3_file.getbuffer())
+
+                filepath.append(os.path.abspath(temp_path))
+
+    elif(file_mode=="folder"):
+        folder = st.text_input(label="Input folder path")
+        if folder!="":
+            for song_file in os.listdir(f'{folder}'):
+                filepath.append(f'{folder}/{song_file}')
+        
     if(st.button("Play Audio")):
-        if test_mp3 is not None:
-            st.audio(test_mp3)
+        if len(filepath)!=0:
+            for mp3_file in filepath:
+                st.audio(mp3_file)
         else:
             st.error('Select an audio file', icon="🚨")
     
     if(st.button("Predict")):
-      if test_mp3 is not None:
-        with st.spinner("Please Wait.."):       
-            X_test = load_and_preprocess_data(filepath)
-            result_index = model_prediction(X_test)
-            st.balloons()
-            label = ['blues', 'classical','country','disco','hiphop','jazz','metal','pop','reggae','rock']
-            st.markdown("**:blue[Model Prediction:] It's a  :red[{}] music**".format(label[result_index]))
+      if len(filepath)!=0:
+        with st.spinner("Please Wait.."):
+            for path in filepath:       
+                X_test = load_and_preprocess_data(path)
+                result_index = model_prediction(X_test)
+                st.balloons()
+                label = ['blues', 'classical','country','disco','hiphop','jazz','metal','pop','reggae','rock']
+                st.markdown("**:blue[Model Prediction:] {song_name} is a  :red[{result}] music**".format(song_name =path[5:], result=label[result_index]))
       else:
-          st.error('Select an audio file', icon="🚨")
+          st.error('Select an audio file or folder', icon="🚨")
